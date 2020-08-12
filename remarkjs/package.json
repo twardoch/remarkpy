@@ -1,0 +1,54 @@
+{
+    "author": {
+        "email": "adam+github@twardoch.com",
+        "name": "Adam Twardoch",
+        "url": "https://github.com/twardoch"
+    },
+    "bugs": "https://github.com/twardoch/remarkpy/issues",
+    "contributors": [
+        "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+    ],
+    "dependencies": {
+        "zmarkdown": "^9.1.2",
+        "unified": "",
+        "unified-stream": "",
+        "remark-parse": "",
+        "remark-rehype": "",
+        "rehype-stringify": ""
+    },
+    "description": "helper to expose unifiedjs world to Python",
+    "devDependencies": {
+        "webpack": "^4.42.1",
+        "webpack-bundle-analyzer": "^3.6.1"
+    },
+    "files": [
+        "index.js"
+    ],
+    "homepage": "https://https://github.com/twardoch/remarkpy",
+    "keywords": [
+        "unified",
+        "remark",
+        "markdown",
+        "mdast",
+        "abstract",
+        "syntax",
+        "tree",
+        "ast"
+    ],
+    "license": "MIT",
+    "name": "remarkpyjs",
+    "pkg": {
+        "scripts": [
+            "./svgo/lib/**/*.js"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/twardoch/remarkpy.git"
+    },
+    "scripts": {
+        "build-dev": "webpack -d --mode development",
+        "build-prod": "webpack -p --mode production"
+    },
+    "version": "1.0.0"
+}
