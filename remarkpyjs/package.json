@@ -11,10 +11,10 @@
     "dependencies": {
         "zmarkdown": "^9.1.2",
         "unified": "",
-        "unified-stream": "",
         "remark-parse": "",
         "remark-rehype": "",
-        "rehype-stringify": ""
+        "rehype-stringify": "",
+        "md-mdast": ""
     },
     "description": "helper to expose unifiedjs world to Python",
     "devDependencies": {
@@ -37,11 +37,6 @@
     ],
     "license": "MIT",
     "name": "remarkpyjs",
-    "pkg": {
-        "scripts": [
-            "./svgo/lib/**/*.js"
-        ]
-    },
     "repository": {
         "type": "git",
         "url": "git://github.com/twardoch/remarkpy.git"
