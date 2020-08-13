@@ -9,16 +9,16 @@
         "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
     ],
     "dependencies": {
-        "zmarkdown": "^9.1.2",
-        "unified": "",
-        "remark-parse": "",
-        "remark-rehype": "",
-        "rehype-stringify": "",
         "md-mdast": ""
     },
     "description": "helper to expose unifiedjs world to Python",
     "devDependencies": {
-        "webpack": "^4.42.1",
+        "babel-loader": "^8.1.0",
+        "@babel/core": "^7.11.1",
+        "@babel/preset-env": "^7.11.0",
+        "babelify": "^10.0.0",
+        "browserify": "^16.5.2",
+        "webpack": "^4.44.1",
         "webpack-bundle-analyzer": "^3.6.1"
     },
     "files": [
@@ -42,8 +42,14 @@
         "url": "git://github.com/twardoch/remarkpy.git"
     },
     "scripts": {
-        "build-dev": "webpack -d --mode development",
-        "build-prod": "webpack -p --mode production"
+        "browserify": "browserify index.js --transform babelify --standalone util > ../remarkpy/remarkpy.js",
+        "webpack-dev": "webpack -d --mode development",
+        "webpack": "webpack -p --mode production"
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-env"
+        ]
     },
     "version": "1.0.0"
 }

@@ -11,10 +11,14 @@ import quickjs
 with open('./test.md') as mdf:
     md = mdf.read()
 
-ctx = quickjs.Context()
-
 with open('./remarkpy.js') as f:
-    rjs = ctx.module(f.read())
+#with open('../remarkpyjs/index.js') as f:
+    js = f.read()
 
-print(rjs)
-#print(parseMD(md))
+parseMd = quickjs.Function('parseMd', js)
+print(parseMd('## H1'))
+#parseHtml = quickjs.Function('parseHtml', js)
+
+#print(parseHtml('<h1>hello</h1>'))
+#print(parseHtml)
+#help(parseHtml)
