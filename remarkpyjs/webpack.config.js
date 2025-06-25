@@ -11,9 +11,13 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "..", "remarkpy"),
         filename: "remarkpy.js",
+        library: "parseMd", // The name of the function to be exported
+        libraryTarget: "var", // Exposes it as `var parseMd = <output>;`
+                              // This makes it available in the global scope for QuickJS
+        globalObject: "this", // Ensures compatibility across different JS environments for UMD/global targets
     },
     externals: {
-        std: "std",
+        std: "std", // Assuming 'std' is a QuickJS provided module, if used
     },
     node: {
         fs: "empty",

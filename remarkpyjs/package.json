@@ -42,7 +42,8 @@
         "url": "git://github.com/twardoch/remarkpy.git"
     },
     "scripts": {
-        "browserify": "browserify index.js --transform babelify --standalone util > ../remarkpy/remarkpy.js",
+        "build": "webpack -p --mode production",
+        "build:dev": "webpack -d --mode development",
         "webpack-dev": "webpack -d --mode development",
         "webpack": "webpack -p --mode production"
     },
