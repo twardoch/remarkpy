@@ -1,27 +1,32 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Core module for Remarkpy, providing Python bindings to RemarkJS functionality.
 """
 
-__version__ = '0.1.0' # Initial MVP version
+__version__ = "0.1.0"  # Initial MVP version
 
 import json
-import quickjs
 import os
-from typing import Any, Dict, List, Union
+from typing import Any, Dict
+
+import quickjs
 
 # Determine the correct path to remarkpy.js, assuming it's in the same directory as core.py
 # This will be important when the package is installed.
-_JS_FILE_PATH = os.path.join(os.path.dirname(__file__), 'remarkpy.js')
+_JS_FILE_PATH = os.path.join(os.path.dirname(__file__), "remarkpy.js")
+
 
 class RemarkpyError(Exception):
     """Base exception for errors raised by Remarkpy."""
+
     pass
+
 
 class JavaScriptError(RemarkpyError):
     """Raised when the underlying JavaScript code throws an error."""
+
     pass
+
 
 class RemarkpyParser:
     """
@@ -41,7 +46,7 @@ class RemarkpyParser:
             JavaScriptError: If there's an error initializing the JavaScript context.
         """
         try:
-            with open(_JS_FILE_PATH, 'r', encoding='utf-8') as f:
+            with open(_JS_FILE_PATH, encoding="utf-8") as f:
                 js_code = f.read()
         except FileNotFoundError:
             raise RemarkpyError(
@@ -52,10 +57,12 @@ class RemarkpyParser:
             raise RemarkpyError(f"Failed to load JavaScript file: {e}")
 
         try:
-            self._parse_md_func = quickjs.Function('parseMd', js_code)
+            self._parse_md_func = quickjs.Function("parseMd", js_code)
         except quickjs.JSException as e:
-            raise JavaScriptError(f"Error initializing JavaScript parseMd function: {e}")
-        except Exception as e: # Catch other potential errors from quickjs
+            raise JavaScriptError(
+                f"Error initializing JavaScript parseMd function: {e}"
+            )
+        except Exception as e:  # Catch other potential errors from quickjs
             raise RemarkpyError(f"Unexpected error setting up QuickJS function: {e}")
 
     def parse(self, markdown_text: str) -> Dict[str, Any]:
@@ -82,7 +89,9 @@ class RemarkpyParser:
             if not isinstance(ast, dict):
                 # This case should ideally not happen if md-mdast returns a standard AST object
                 # but good to have a check.
-                raise RemarkpyError(f"JavaScript parser returned an unexpected type: {type(ast)}")
+                raise RemarkpyError(
+                    f"JavaScript parser returned an unexpected type: {type(ast)}"
+                )
             return ast
         except quickjs.JSException as e:
             raise JavaScriptError(f"JavaScript error during parsing: {e}")
@@ -90,8 +99,9 @@ class RemarkpyParser:
             # Catching broader exceptions that might occur during the call
             raise RemarkpyError(f"An unexpected error occurred during parsing: {e}")
 
+
 # Example Usage (for testing purposes, can be removed or moved to an example script later)
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = RemarkpyParser()
 
     # Test 1: Simple Markdown
@@ -110,9 +120,9 @@ if __name__ == '__main__':
     # For robust example, it should be packaged or path handled more carefully
     try:
         # Adjust path to where test.md is expected relative to this file for __main__
-        test_md_path = os.path.join(os.path.dirname(__file__), '..', 'test.md')
+        test_md_path = os.path.join(os.path.dirname(__file__), "..", "test.md")
         if os.path.exists(test_md_path):
-            with open(test_md_path, 'r', encoding='utf-8') as mdf:
+            with open(test_md_path, encoding="utf-8") as mdf:
                 md_from_file = mdf.read()
             print(f"Parsing content from {test_md_path}:")
             ast_from_file = parser.parse(md_from_file)
