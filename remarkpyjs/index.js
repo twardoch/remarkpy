@@ -1,8 +1,10 @@
 const { create } = require('md-mdast');
 
-export function parseMd(md) {
+function parseMd(md) {
     const mdParser = create();
     const mdast = mdParser.tokenizeBlock(md);
     return mdast;
 }
-//exports.hello = hello;
+
+// Export as the main function for webpack
+module.exports = parseMd;
